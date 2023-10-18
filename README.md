@@ -146,3 +146,13 @@ __Q: Is it possible to use Barrier on Mac OS X / OS X versions prior to 10.12?__
 >      - *(see [#109](https://github.com/debauchee/barrier/issues/109) and [#1251](https://github.com/debauchee/barrier/issues/1251) for status or to volunteer your talents)*
 >
 > The complete list of open issues can be found in the ['Issues' tab on GitHub](https://github.com/debauchee/barrier/issues?q=is%3Aissue+is%3Aopen). Help is always appreciated.
+
+
+## To make a cert SSL
+
+
+cd  "path to your SSL"
+mkdir -p Fingerprints
+openssl req -x509 -nodes -days 365 -subj /CN=barrier -newkey rsa:4096 -keyout Barrier.pem -out Barrier.pem
+openssl x509 -fingerprint -sha256 -noout -in Barrier.pem > Fingerprints/Local.txt
+sed -e "s/.*=/v2:sha256:/" -i Fingerprints/Local.txt
